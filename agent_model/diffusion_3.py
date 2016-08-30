@@ -17,21 +17,18 @@ nt=50000;
 p=np.zeros([nx,ny,2]);
 #Here we set the boundary conditions for t (can be call initial conditions). It is going to be 20 hot or cold points in random positions.
 for f in range(20):
-  p[round((nx-1)*rand()),round((ny-1)*rand()),0]=np.sign(rand()-0.51);
+  p[round((nx-1)*rand()),round((ny-1)*rand()),1]=np.sign(rand()-0.51);
+  p[50,50,1] = 10000
 for m in range(1,nt):
+  print(p[50,50,1])
 #A simple implementation (but not quite eficient) will be iterating each point at a time. Because we have a matrix, we can operate with whole sections of the matrix at each time.
 #Basically, we take time slices and operate them as a whole. To use centered differences, we simply shift the matrix one element in the x direction or in the y direction.
-  
-  if m == 0:
-    p[1:nx-1,1:ny-1,1]=p[1:nx-1,1:ny-1,m-1]+dt*Dz*((p[2:nx,1:ny-1,m-1]-2*p[1:nx-1,1:ny-1,m-1]+p[0:nx-2,1:ny-1,m-1])/np.power(dx,2)+(p[1:nx-1,2:ny,m-1]-2*p[1:nx-1,1:ny-1,m-1]+p[1:nx-1,0:ny-2,m-1])/np.power(dy,2));
-  
-  else:
-    p[:,:,0] = p[:,:,1]
-    p[1:nx-1,1:ny-1,1]=p[1:nx-1,1:ny-1,0]+dt*Dz*((p[2:nx,1:ny-1,0]-2*p[1:nx-1,1:ny-1,0]+p[0:nx-2,1:ny-1,0])/np.power(dx,2)+(p[1:nx-1,2:ny,0]-2*p[1:nx-1,1:ny-1,0]+p[1:nx-1,0:ny-2,0])/np.power(dy,2));
+  p[:,:,0] = p[:,:,1]
+  p[1:nx-1,1:ny-1,1]=p[1:nx-1,1:ny-1,0]+dt*Dz*((p[2:nx,1:ny-1,0]-2*p[1:nx-1,1:ny-1,0]+p[0:nx-2,1:ny-1,0])/np.power(dx,2)+(p[1:nx-1,2:ny,0]-2*p[1:nx-1,1:ny-1,0]+p[1:nx-1,0:ny-2,0])/np.power(dy,2));
 
+  #if m % 100 == 0:
+  #  print(p[50,50,1])
   if m % 100 == 0:
-    print(m)
-  if m % 10 == 0:
     #Finally we plot several iterations
     fig = figure()
     for g in range(18):
