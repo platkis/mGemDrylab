@@ -7,6 +7,7 @@ from matplotlib.pyplot import *
 from PIL import Image,ImageSequence
 import sys,os,csv
 
+#Default parameters:
 #run_number = 0
 #passive_signal_production = 0.5
 #active_signal_production = 5.0
@@ -15,6 +16,8 @@ import sys,os,csv
 #Rz=0.001;
 #signal_thresh = 10.0
 #factor_thresh = 10.0
+#Dz_factor = 0.02
+#Rz_factor = 0.001
 
 run_number = float(sys.argv[1])
 passive_signal_production = float(sys.argv[2])
