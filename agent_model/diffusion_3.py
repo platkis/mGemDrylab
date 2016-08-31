@@ -106,4 +106,4 @@ for i in frame_names:
   frame_images.append(Image.open(i))
 
 writeGif(filename,frame_images,duration=0.02,repeat=True)
-os.remove("./img/agent"+str(num_number)+"/*png")
+os.remove("./img/agent"+str(run_number)+"/*png")
